@@ -29,7 +29,7 @@ batch_size = 32
 epochs = 10
 embedding_dim = 256
 hidden_dim = 256
-maxlen = 32
+maxlen = 64
 gpu_id = 0
 
 if not os.path.exists(output_dir):

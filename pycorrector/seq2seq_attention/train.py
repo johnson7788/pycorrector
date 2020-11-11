@@ -16,6 +16,11 @@ from pycorrector.seq2seq_attention.model import Seq2SeqModel
 
 
 def tokenize(lang, maxlen):
+    """
+    :param lang: 正确或错误句子组成的列表
+    :param maxlen:
+    :return:
+    """
     lang_tokenizer = tf.keras.preprocessing.text.Tokenizer(filters='')
     lang_tokenizer.fit_on_texts(lang)
     seq = lang_tokenizer.texts_to_sequences(lang)
@@ -35,12 +40,14 @@ def train(train_path='',
           hidden_dim=1024,
           gpu_id=0
           ):
+    #所有错误句子和正确句子组成的列表
     source_texts, target_texts = create_dataset(train_path, None)
     print(source_texts[-1])
     print(target_texts[-1])
 
     source_seq, source_word2id = tokenize(source_texts, maxlen)
     target_seq, target_word2id = tokenize(target_texts, maxlen)
+    #保存到本地单词表
     save_word_dict(source_word2id, save_src_vocab_path)
     save_word_dict(target_word2id, save_trg_vocab_path)
 
