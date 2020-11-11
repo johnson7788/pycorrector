@@ -10,11 +10,18 @@ from pycorrector.utils.tokenizer import segment
 from pycorrector.seq2seq_attention import config
 
 
-def parse_file(path):
+def parse_file(path, line_start, line_end):
+    """
+    :param path:
+    :param line_start: 从第几行开始
+    :param line_end:  从第几行结束
+    :return:
+    """
     print('Parse data from %s' % path)
     data_list = []
-    with open(filename=path, mode="r", encoding='utf-8') as file:
-        for line in file:
+    with open(filename=path, mode="r", encoding='utf-8') as f:
+        lines = f.readlines()
+        for line in lines[line_start:line_end]:
             line_split = line.split('\t')
             #我们只使用原始的错误语句和最终的正确句子
             src = line_split[2]
@@ -29,7 +36,8 @@ def parse_file(path):
     return data_list
 
 def _save_data(data_list, data_path):
-    with open(data_path, 'w', encoding='utf-8') as f:
+    print("开始写入文件,默认追加模式")
+    with open(data_path, 'a+', encoding='utf-8') as f:
         count = 0
         for src, dst in data_list:
             f.write(' '.join(src) + '\t' + ' '.join(dst) + '\n')
@@ -47,5 +55,5 @@ if __name__ == '__main__':
     # train data
     data_list = []
     for path in config.raw_train_paths:
-        data_list.extend(parse_file(path))
+        data_list.extend(parse_file(path,line_start=0,line_end=2001))
     save_corpus_data(data_list, config.train_path, config.test_path)

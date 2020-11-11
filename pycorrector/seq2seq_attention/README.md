@@ -15,19 +15,24 @@
 ```
 tensorflow>=2.0.0 # tensorflow-gpu>=2.0.0
 ```
+# 修改配置文件config.py，修改原始文件读取的位置
+注意函数
+```buildoutcfg
+def parse_file(path, line_start, line_end):
+```
 
 ### Preprocess
 
 
-- toy train data
+- 生成训练和测试数据，拆分比例9：1
 ```
 cd seq2seq_attention
 python preprocess.py
 ```
 
-generate toy train data(`train.txt`) and valid data(`test.txt`), segment by char.
+生成文件在目录output/test.txt 和output/train.txt 下，逐个字分隔
 
-result:
+例如:
 ```
 # train.txt:
 如 服 装 ， 若 有 一 个 很 流 行 的 形 式 ， 人 们 就 赶 快 地 追 求 。\t如 服 装 ， 若 有 一 个 很 流 行 的 样 式 ， 人 们 就 赶 快 地 追 求 。
