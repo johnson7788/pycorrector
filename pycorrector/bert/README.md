@@ -56,8 +56,8 @@ Bert模型纠错效果评估如下：
 看来选择一个好的模型，选择一个正确的方向真的很重要。我在这里只能希望规则的方法尽量做到扩展性好些，深度模型尽量做到调研各种模型全一些，深入一些。
 
 
-
-## Fine-tuned BERT model with chinese corpus
+## 微调BERT模型，其实只是训练一个BERT模型
+不用微调也可以用BERT模型的MLM特点直接对输入的句子进行Mask预测，用人民日报数据微调后，效果会好些
 
 ### chinese corpus
 
@@ -74,7 +74,6 @@ Bert模型纠错效果评估如下：
 export CUDA_VISIBLE_DEVICES=0,1,2
 export TRAIN_FILE=people2014_cged_wiki.txt
 export TEST_FILE=people2014_cged_wiki.txt
-
 
 python run_language_modeling.py \
     --output_dir=chinese_finetuned_lm \

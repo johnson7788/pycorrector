@@ -185,6 +185,7 @@ def build_eval_corpus(output_eval_path=eval_data_path):
     :param output_eval_path:
     :return: json file
     """
+    #加载不同的数据集
     bcmi_path = os.path.join(pwd_path, '../data/cn/bcmi.txt')
     clp_path = os.path.join(pwd_path, '../data/cn/clp14_C1.pkl')
     sighan_path = os.path.join(pwd_path, '../data/cn/sighan15_A2.pkl')
@@ -205,7 +206,7 @@ def build_eval_corpus(output_eval_path=eval_data_path):
     no_error_path = os.path.join(pwd_path, './noerror_corpus.json')
     build_cged_no_error_corpus(cged_path, no_error_path)
     no_errors = load_json(no_error_path)
-
+    #抽样
     corpus = sample(char_errors, 100) + sample(word_errors, 100) + sample(grammar_errors, 100) + sample(no_errors, 200)
     save_json(corpus, output_eval_path)
     print("save eval corpus done", output_eval_path)
@@ -311,11 +312,11 @@ def eval_corpus_by_bert(input_eval_path=eval_data_path, output_eval_path=output_
 
 if __name__ == "__main__":
     # 生成评估数据集样本，当前已经生成评估集，可以打开注释生成自己的样本分布
-    # build_eval_corpus()
+    build_eval_corpus()
 
     # 评估规则方法的纠错准召率
-    eval_corpus(eval_data_path, output_eval_path=output_eval_error_path)
+    # eval_corpus(eval_data_path, output_eval_path=output_eval_error_path)
 
     # 评估bert模型的纠错准召率
-    bert_path = os.path.join(pwd_path, './eval_corpus_error_by_bert.json')
-    eval_corpus_by_bert(eval_data_path, output_eval_path=bert_path)
+    # bert_path = os.path.join(pwd_path, './eval_corpus_error_by_bert.json')
+    # eval_corpus_by_bert(eval_data_path, output_eval_path=bert_path)

@@ -43,6 +43,16 @@ class Detector(object):
                  person_name_path=config.person_name_path,
                  place_name_path=config.place_name_path,
                  stopwords_path=config.stopwords_path):
+        """
+
+        :param language_model_path:
+        :param word_freq_path:
+        :param custom_word_freq_path:
+        :param custom_confusion_path:
+        :param person_name_path:
+        :param place_name_path:
+        :param stopwords_path:
+        """
         self.name = 'detector'
         self.language_model_path = language_model_path
         self.word_freq_path = word_freq_path
@@ -327,10 +337,10 @@ class Detector(object):
     @staticmethod
     def split_2_short_text(text, include_symbol=False):
         """
-        长句切分为短句
-        :param text: str
-        :param include_symbol: bool
-        :return: (sentence, idx)
+        长句切分为短句,
+        :param text: str  eg: '疝気医院那好 为老人让坐，疝気专科百科问答'
+        :param include_symbol: bool  是否包含标点符号
+        :return: (sentence, idx)  eg:  [('疝気医院那好', 0), (' ', 6), ('为老人让坐', 7), ('，', 12), ('疝気专科百科问答', 13)]
         """
         result = []
         blocks = re_han.split(text)

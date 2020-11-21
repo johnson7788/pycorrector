@@ -26,6 +26,19 @@ class Corrector(Detector):
                  person_name_path=config.person_name_path,
                  place_name_path=config.place_name_path,
                  stopwords_path=config.stopwords_path):
+        """
+        初始化一个corrector模型
+        :param common_char_path: # 中文常用字符集
+        :param same_pinyin_path: # 同音字
+        :param same_stroke_path: # 形似字
+        :param language_model_path:  默认使用的语言模型, ~/.pycorrector/datasets/zh_giga.no_cna_cmn.prune01244.klm
+        :param word_freq_path: # 通用分词词典文件  format: 词语 词频
+        :param custom_word_freq_path: # 用户自定义分词词典  format: 词语 词频
+        :param custom_confusion_path:  # 用户自定义错别字混淆集  format:变体	本体   本体词词频（可省略）
+        :param person_name_path: # 知名人名词典 format: 词语 词频
+        :param place_name_path: # 地名词典 format: 词语 词频
+        :param stopwords_path:
+        """
         super(Corrector, self).__init__(language_model_path=language_model_path,
                                         word_freq_path=word_freq_path,
                                         custom_word_freq_path=custom_word_freq_path,
@@ -107,11 +120,11 @@ class Corrector(Detector):
         return result
 
     def _initialize_corrector(self):
-        # chinese common char
+        # 加载 中文常用字符集, 是所有常用字的set
         self.cn_char_set = self.load_set_file(self.common_char_path)
-        # same pinyin
+        # same pinyin, 加载同音字， 是一个字典，元素是类似 '一': {'漪', '壹'}
         self.same_pinyin = self.load_same_pinyin(self.same_pinyin_text_path)
-        # same stroke
+        # same stroke, 形近字，也是字典，类似pinyin的加载方式
         self.same_stroke = self.load_same_stroke(self.same_stroke_text_path)
         self.initialized_corrector = True
 
@@ -167,7 +180,7 @@ class Corrector(Detector):
     def generate_items(self, word, fragment=1):
         """
         生成纠错候选集
-        :param word:
+        :param word: eg: '疝'
         :param fragment: 分段
         :return:
         """
@@ -179,9 +192,9 @@ class Corrector(Detector):
         # 多于2字
         candidates_3 = []
 
-        # same pinyin word
+        # same pinyin word: 取出音相同的字 eg: ['善', '陕', '膳', '珊', '衫', '闪', '山', '擅', '删', '赡', '杉', '苫', '扇']
         candidates_1.extend(self._confusion_word_set(word))
-        # custom confusion word
+        # custom confusion word, , 取出自定义的
         candidates_1.extend(self._confusion_custom_set(word))
         # same pinyin char
         if len(word) == 1:

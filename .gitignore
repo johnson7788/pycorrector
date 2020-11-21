@@ -100,3 +100,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+pycorrector/data/bert_models/chinese_finetuned_lm
+pycorrector/seq2seq_attention/output/*
