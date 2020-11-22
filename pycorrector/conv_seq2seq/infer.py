@@ -22,6 +22,7 @@ def infer(model_path, vocab_dir, arch, test_data, max_len, temperature):
                         temperature=temperature,
                         path=model_path)
     args = options.parse_args_and_arch(parser, input_args=[vocab_dir])
+    args.max_sentences = 1
     return interactive.main(args)
 
 

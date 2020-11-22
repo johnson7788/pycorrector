@@ -1,41 +1,48 @@
 # Neural Text Error Correction with Conv Seq2Seq Model
 
-## Features
+## 特点
 
-The model is equipped with following features:
+该模型具有以下特点：
 
 - ```Attention based seq2seq framework.```
-Encoder and decoder can be LSTM or GRU. The attention scores can be calculated with three different alignment methods.
+编码器和解码器可以是LSTM或GRU。可以使用三种不同的对齐方法来计算注意力得分。
 
 - ```CONV seq2seq network.```
 
 - ```Beam search algorithm.```
-We implemented an efficient beam search algorithm that can also handle cases when batch_size>1.
+我们实现了一种有效的beam search算法，该算法还可以处理batch_size> 1时的情况。
 
 - ```Unknown words replacement.```
+该meta-algorithm 可以与任何基于注意力的seq2seq模型一起使用。
+OOV单词UNK使用注意力权重手动替换为源文章中的单词。
 This meta-algorithm can be used along with any attention based seq2seq model.
-The OOV words UNK in summaries are manually replaced with words in source articles using attention weights.
 
-## Usage
+## 使用方式
 
-### Requirements
+### 依赖
 * pip安装依赖包
 ```bash
-pip install fairseq>=0.9.0 torch>=1.3.1
+pip install fairseq==0.9.0 torch==1.5.0
 
+# python3.7
+pip install fairseq==0.10 torch==1.5.0 pypinyin six
 ```
 
 
 ### Preprocess
 
-
-- toy train data
+- mini数据集
 ```
 cd conv_seq2seq
 python preprocess.py
 ```
-
-generate toy train data(`train.src` and `train.trg`) and valid data(`valid.src` and `valid.trg`), segment by char.
+在本目录下生成output, 先生成原始文件
+train.src
+train.trg
+valid.src
+valid.trg
+然后调用fairseq, 生成的bin目录下文件
+调用fairseq，生成按字符拆分的数据, train data(`train.src` and `train.trg`), valid data(`valid.src` and `valid.trg`)
 
 result:
 ```
@@ -50,7 +57,7 @@ result:
 如 服 装 ， 若 有 一 个 很 流 行 的 样 式 ， 人 们 就 赶 快 地 追 求 。
 ```
 
-- big train data
+- 方法二：下载大数据集
 
 1. download from https://pan.baidu.com/s/1BkDru60nQXaDVLRSr7ktfA  密码:m6fg [130W sentence pair，215MB], put data to `conv_seq2seq/output` folder.
 2. run `preprocess.py`.
@@ -79,13 +86,14 @@ conv_seq2seq/output
 └── valid.trg
 ```
 
-### Train
+### 训练
 
 ```
 sh train.sh
 ```
 
 ### Infer
+修改config.py中训练好的模型的路径，开始推理
 ```
 python infer.py
 

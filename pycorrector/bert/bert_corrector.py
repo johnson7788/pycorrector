@@ -77,6 +77,7 @@ class BertCorrector(Corrector):
                     if top_tokens and (s not in top_tokens):
                         # 取得所有可能正确的词, 根据自定义的形近字和形音字和自定义，取出可能的候选词
                         candidates = self.generate_items(s)
+                        # 如果这个字存在形近字或形音字，才进行继续纠正
                         if candidates:
                             for token_str in top_tokens:
                                 if token_str in candidates:
@@ -94,6 +95,7 @@ class BertCorrector(Corrector):
 if __name__ == "__main__":
     d = BertCorrector()
     error_sentences = [
+        '我喜欢吃核面条',
         '疝気医院那好 为老人让坐，疝気专科百科问答',
         '少先队员因该为老人让坐',
         '少 先  队 员 因 该 为 老人让坐',
