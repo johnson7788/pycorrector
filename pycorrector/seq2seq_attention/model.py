@@ -189,6 +189,11 @@ class Seq2SeqModel(object):
             print('Time taken for 1 epoch {} sec\n'.format(time.time() - start))
 
     def evaluate(self, sentence):
+        """
+        对输入句子评估
+        :param sentence:
+        :return:
+        """
         attention_plot = np.zeros((self.maxlen, self.maxlen))
         char_split_sent = ' '.join(list(sentence.replace(" ", "")))
         sentence = preprocess_sentence(char_split_sent)

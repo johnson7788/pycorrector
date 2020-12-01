@@ -103,3 +103,4 @@ ENV/
 pycorrector/data/bert_models/chinese_finetuned_lm
 pycorrector/seq2seq_attention/output/*
 pycorrector/conv_seq2seq/output/
+pycorrector/seq2seq_attention/output1

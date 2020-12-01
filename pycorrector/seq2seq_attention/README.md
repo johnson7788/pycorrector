@@ -42,7 +42,7 @@ python preprocess.py
 
 - 正式数据集下载, 数据量比较大，
 1. download from https://pan.baidu.com/s/1BkDru60nQXaDVLRSr7ktfA  密码:m6fg [130W sentence pair，215MB], put data to `seq2seq_attention/output` folder.
-2. run `preprocess.py`.
+2. run `preprocess.py`.  生成output下的trg和src文件
 ```
 python preprocess.py
 ```
