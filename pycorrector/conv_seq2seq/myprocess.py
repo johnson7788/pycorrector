@@ -1,6 +1,8 @@
 from sklearn.model_selection import train_test_split
 from pycorrector.utils.tokenizer import segment
 from pycorrector.conv_seq2seq import config
+import sys
+sys.path.append('../..')
 
 def read_file_split(srcfile, trgfile):
     """
