@@ -82,10 +82,10 @@ if __name__ == '__main__':
         save_data(val_lst, config.val_src_path, config.val_trg_path)
 
     # generate fairseq format data with prepared train data
-    gen_fairseq_data(config.train_src_path.split('.')[-1],
-                     config.train_trg_path.split('.')[-1],
-                     config.trainpref,
-                     config.valpref,
-                     config.vocab_max_size,
-                     config.vocab_max_size,
-                     config.data_bin_dir)
+    gen_fairseq_data(source_lang=config.train_src_path.split('.')[-1],
+                     target_lang=config.train_trg_path.split('.')[-1],
+                     trainpref=config.trainpref,
+                     validpref=config.valpref,
+                     nwordssrc=config.vocab_max_size,
+                     nwordstgt=config.vocab_max_size,
+                     destdir=config.data_bin_dir)
