@@ -25,4 +25,7 @@ CUDA_VISIBLE_DEVICES="${GPU_ID}" python3 -m fairseq_cli.train \
     --max-epoch 100 \
     --max-sentences ${BATCH_SIZE} \
     --max-tokens ${MAX_TOKENS} \
-    --seed ${SEED}
+    --seed ${SEED} \
+    --source_lang src \
+    --target_lang trg
+

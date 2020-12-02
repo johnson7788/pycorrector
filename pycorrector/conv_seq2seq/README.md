@@ -24,7 +24,7 @@ This meta-algorithm can be used along with any attention based seq2seq model.
 ```bash
 pip install fairseq==0.9.0 torch==1.5.0
 
-# python3.7
+# 安装python3.7 
 pip install fairseq==0.10 torch==1.5.0 pypinyin six
 ```
 
