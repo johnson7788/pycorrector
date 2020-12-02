@@ -56,8 +56,7 @@ result:
 也 许 每 个 家 庭 都 有 子 女 而 担 心 子 女 的 现 在 和 未 来 。
 如 服 装 ， 若 有 一 个 很 流 行 的 样 式 ， 人 们 就 赶 快 地 追 求 。
 ```
-bin目录下文件需要存在，才能进行训练，是根据output下的各种src和trg文件生成的
-todo:  需要修改preprocess.py 到myprocess.py
+bin目录下文件需要存在，才能进行训练，是根据output下的各种src和trg文件生成的, 调用fairseq生成的
 
 - 方法二：下载大数据集
 
